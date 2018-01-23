@@ -17,11 +17,10 @@ import modelo.Equipo;
 import modelo.Estudiante;
 
 public class Practicas {
+
+	//estaesunalineaoriginal
 	
 	
-///***********************************ffdgffhfdagdfgdfhgdfg	
-
-
 	// SEGUNDA EVALUACION
 
 	public ArrayList<Estudiante> introListas() {
@@ -91,15 +90,21 @@ public class Practicas {
 			// Abrir el fichero
 			FileReader fr = new FileReader("ficheros/personas.txt");
 			BufferedReader br = new BufferedReader(fr);
-			String linea;
+			String linea; 
+			
+			int acumulado = 0;
+			int contador = 0;
 			// System.out.println(LocalDate.now());
 			// Leer el fichero linea a linea
 			while ((linea = br.readLine()) != null) {
 
-				String[] campos = linea.split("&&");
-				System.out.println(linea);
-				System.out.println(calculaEdad(campos[2]));
-
+	//***********************************************************			
+				//String[] campos = linea.split("&&");
+				//String[] campos = linea.split("%");
+					//if (resultado.get)
+				//System.out.println(linea);
+				//System.out.println(calculaEdad(campos[2]));
+//******************************************************
 			}
 			fr.close();
 			br.close();
@@ -109,6 +114,34 @@ public class Practicas {
 			System.out.println(e.getMessage());
 		}
 	}
+	//**********************************************************************************
+	public HashMap<String,Float> resumenVentasPorVendedor( HashMap<String, ArrayList<Float>> ventas){
+		HashMap<String, Float> resultado = new HashMap<String,Float>();
+		//recorrer hm de entrada creando el de salida.
+		
+		Set<String> claves = ventas.keySet();
+		
+		for (String elementoClave : claves) {
+			
+			// System.out.println(resultado.get(clave).getNombre());
+			
+			for (Float elementoValor : ventas.get(elementoClave)){
+				
+				resultado.put(elementoClave, elementoValor);
+				
+				
+			}
+		}
+		
+		
+		
+		
+		
+		return resultado;
+	}
+		
+	//***********************************************************************************
+	
 
 	public int calculaEdad(String fechaNacimiento) { // ddmmaaaa
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("ddMMyyyy");
@@ -119,6 +152,89 @@ public class Practicas {
 				periodo.getDays());
 		return periodo.getYears();
 	}
+		
+	//***********************leer fichero con arraylist***********************************************
+	
+	public ArrayList<String> leerFicheroTextoArrayList(String rutaFichero) {
+		ArrayList<String>  resultado = new ArrayList<String>();
+			try {
+			// Abrir el fichero
+			FileReader fr = new FileReader(rutaFichero);
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+				resultado.add(linea);
+			}
+			fr.close();//cierra el fichero
+			br.close();//cierra el buffer
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return resultado;
+	}
+	
+	//******************************leer fichero con hashmap*****************************************************************
+	public HashMap<String, String> leerFicheroTextoHashMap(String rutaFichero) {
+		HashMap<String, String> resultado = new HashMap<String, String>();//la clave es el dni, el valor es la  linea que coincide con el dni.
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader(rutaFichero);
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+				String[] clave = linea.split("&&");//cuchillo de corte, corta por la cadena &&
+				resultado.put(clave[0], linea);
+				}
+			fr.close();//cierra el fichero
+			br.close();//cierra el buffer
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return resultado;
+	}
+	//***********************************EJERCICIO RESUMENVENTAS*************************************************
+	
+	public HashMap<String,ArrayList<Float>> resumenVentasVendedor(String rutaFichero){
+		HashMap<String,ArrayList<Float>> resultado = new HashMap<String,ArrayList<Float>>();
+	
+		try {
+			FileReader fr = new FileReader(rutaFichero);
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			while ((linea = br.readLine()) != null) {
+				String fechaV = linea.split("%")[0];
+				String idV = linea.split("%")[1];
+				float importeV = Float.parseFloat(linea.split("%")[2]);
+				if (!resultado.containsKey(idV)) { //(resultado.get(idV)== null)
+					ArrayList<Float> lista = new ArrayList<Float>();
+					lista.add(importeV);
+					resultado.put(idV, lista );					
+				} else {
+					ArrayList<Float> lista = resultado.get(idV);
+					lista.add(importeV);
+					resultado.put(idV, lista );
+				}
+				
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	//**********************************************************************************************************
 
 	// private static String[] diasSemana = { "lunes", "martes", "miercoles",
 	// "jueves", "viernes", "sábado", "domingo" };
@@ -326,7 +442,18 @@ public class Practicas {
 			saldoFinal += movimientos[i];
 		return saldoFinal;
 	}
-
+//*****************************************calculaSaldo ArrayList****************************************************************
+	
+	public float calculaSaldo( float saldoInicial, ArrayList<Float> movimientos) {
+		float saldoFinal = saldoInicial;
+		for (Float elemento : movimientos) {
+			
+			saldoFinal += elemento;
+		}
+			
+		return saldoFinal;
+	}
+//*********************************************************************************************************
 	public int[] convierteCadenasANumeros(String[] cadenas) {
 		int[] resultado = new int[cadenas.length];
 		for (int i = 0; i < resultado.length; i++) {

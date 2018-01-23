@@ -88,7 +88,7 @@ public class Principal {
 		/*
 		 * String[] misDatos = { "123","abc", "345", "1x2", "990" }; //int[] res =
 		 * practicas.convierteCadenasANumeros(misDatos); float saldo= 1000.0f; float[]
-		 * movimientos= {10.0f, -5.0f,20.5f};
+		  movimientos= {10.0f, -5.0f,20.5f};
 		 * 
 		 * float saldoFinal = practicas.calculaSaldo(saldo, movimientos);
 		 */
@@ -141,9 +141,30 @@ public class Principal {
 		HashMap<String, Estudiante> mapa = practicas.introMapas();
 		Estudiante noexisto = mapa.get("noexisto");
 		
-		practicas.leerFicheroTexto();
+		practicas.leerFicheroTexto();//este no devolvia
+		
+		ArrayList<String> recoge = practicas.leerFicheroTextoArrayList("ficheros/personas.txt");
+		
+		HashMap<String, String> recoge1 = practicas.leerFicheroTextoHashMap("ficheros/personas.txt");
+		
+		
+		HashMap<String,ArrayList<Float>> resultado = practicas.resumenVentasVendedor("ficheros/VentasDeptoAlmacen.txt");
+		
+		practicas.resumenVentasPorVendedor(resultado);
+		
+	//*****************************************valores *****************************************************	
+		ArrayList<Float> movimientos = new ArrayList<Float>();
+		movimientos.add(50.5f);
+		movimientos.add(60.5f);
+		movimientos.add(70.5f);
+		float resultadoSaldo = practicas.calculaSaldo(1000.0f, movimientos);
+	//******************************************************************************************************	
 		
 		System.out.println("fin");
+		
+		
+		
+		
 
 	}
 
