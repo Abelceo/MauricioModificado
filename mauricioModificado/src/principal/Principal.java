@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import auxiliar.Practicas;
@@ -66,23 +67,40 @@ public class Principal {
 				{ 23, 3, 56, 12, 32, 23, 17, 12, 11, 34, 45, 45 }, { 23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 37 }
 
 		};
-		ArrayList<ArrayList<Integer>> listaMatriz = practicas.convierteMatrizArrayLista(visitantesYear);
-		
-		
-		
-		
-		
-		
 		
 		
 		String[] islas = { "GC", "LTE", "FTV", "TFE", "LPA", "GOM", "HIE" };
 		String[] meses = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
-
+		int isla=2; int mes =7; System.out.println("Visitantes en "+ islas[isla]
+				 +" : " + practicas.visitantesIslaYear(isla, visitantesYear));
 		
-		 int isla=2; int mes =7; System.out.println("Visitantes en "+ islas[isla]
-		 +" : " + practicas.visitantesIslaYear(isla, visitantesYear));
-		 System.out.println("Visitantes  en Canarias en el mes " + meses[mes]+ " : " +
-		 practicas.visitantesMesYear(mes, visitantesYear));
+		ArrayList<ArrayList<Integer>> listaMatriz = practicas.convierteMatrizArrayLista(visitantesYear);
+	//************************************************************************************************************	
+		ArrayList<List<Integer>> visitYear = new ArrayList<List<Integer>>();
+		visitYear.add( Arrays.asList(2, 4, 5, 1, 3, 2, 1, 1, 1, 3, 5, 1));
+		visitYear.add( Arrays.asList(23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 13));
+		visitYear.add( Arrays.asList(23, 3, 56, 12, 32, 23, 17, 12, 11, 34, 45, 12));
+		visitYear.add( Arrays.asList(23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 13));
+		visitYear.add( Arrays.asList(23, 4, 56, 12, 32, 23, 17, 12, 11, 34, 45, 10));
+		visitYear.add( Arrays.asList(23, 3, 56, 12, 32, 23, 17, 12, 11, 34, 45, 45));
+		visitYear.add( Arrays.asList(23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 37));
+		
+		
+		System.out.println("list: " + practicas.visitantesIslaYear(isla, visitYear));
+		
+		
+		
+	//*************************************************************************************************************	
+		
+		ArrayList<ArrayList<Integer>> datos2 = practicas.convierteMatrizArrayEnMatrizArrayList(visitantesYear);
+		System.out.println("Arraylist: " + practicas.visitantesIslaYear2(isla, datos2));
+		
+	//*************************************************************************************************************
+		
+		 
+		// System.out.println("Visitantes  en Canarias en el mes " + meses[mes]+ " : " +
+		// practicas.visitantesMesYear(mes, visitantesYear));
+		 
 		 
 
 		/*

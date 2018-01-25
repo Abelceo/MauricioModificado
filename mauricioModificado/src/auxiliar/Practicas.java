@@ -9,6 +9,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -631,17 +632,39 @@ public class Practicas {
 			acu += v[isla][j];
 		return acu;
 	}
-	//******************************************************************************************************
+	//****************************************con ArrayList y List**************************************************************
 	
-		public int visitantesIslaYear(int isla, ArrayList<ArrayList<Integer>> v) {
+		public int visitantesIslaYear(int isla, ArrayList<List<Integer>> v) {
 
 			int acu = 0;
 			for (int j = 0; j < v.get(0).size(); j++)
 				acu += v.get(isla).get(j);
 			return acu;
 		}
-	
-	
+	//****************************************con  ArrayList  ArrayList*************************************
+		
+		public int visitantesIslaYear2(int isla, ArrayList<ArrayList<Integer>> v) {
+			int acu = 0;
+			for (int j = 0; j < v.get(0).size(); j++)
+				acu += v.get(isla).get(j);
+			return acu;
+			
+		}
+	//*****************************************************************************************************	
+		
+		public ArrayList<ArrayList<Integer>> convierteMatrizArrayEnMatrizArrayList(int[][] matriz){
+			ArrayList<ArrayList<Integer>> resultado = new ArrayList<ArrayList<Integer>>();
+			
+			for (int i = 0; i < matriz.length; i++) {
+				resultado.add(new ArrayList<Integer>());
+				for (int j = 0; j < matriz[i].length ; j++) {
+					resultado.get(i).add(matriz[i][j]);
+				}
+			}
+			return resultado;
+		}
+		
+		
 	//******************************************************************************************************
 
 	public int visitantesMesYear(int mes, int[][] v) {
