@@ -78,12 +78,12 @@ public class Principal {
 		String[] islas = { "GC", "LTE", "FTV", "TFE", "LPA", "GOM", "HIE" };
 		String[] meses = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
 
-		/*
-		 * int isla=2; int mes =7; System.out.println("Visitantes en "+ islas[isla]
-		 * +" : " + practicas.visitantesIslaYear(isla, visitantesYear));
-		 * System.out.println("Visitantes  en Canarias en el mes " + meses[mes]+ " : " +
-		 * practicas.visitantesMesYear(mes, visitantesYear));
-		 */
+		
+		 int isla=2; int mes =7; System.out.println("Visitantes en "+ islas[isla]
+		 +" : " + practicas.visitantesIslaYear(isla, visitantesYear));
+		 System.out.println("Visitantes  en Canarias en el mes " + meses[mes]+ " : " +
+		 practicas.visitantesMesYear(mes, visitantesYear));
+		 
 
 		/*
 		 * String[] misDatos = { "123","abc", "345", "1x2", "990" }; //int[] res =
