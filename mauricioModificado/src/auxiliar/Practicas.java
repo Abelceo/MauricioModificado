@@ -623,6 +623,7 @@ public class Practicas {
 			}
 		}
 	}
+	//****************************************************************************************************
 
 	public int visitantesIslaYear(int isla, int[][] v) {
 		int acu = 0;
@@ -630,6 +631,18 @@ public class Practicas {
 			acu += v[isla][j];
 		return acu;
 	}
+	//******************************************************************************************************
+	
+		public int visitantesIslaYear(int isla, ArrayList<ArrayList<Integer>> v) {
+
+			int acu = 0;
+			for (int j = 0; j < v.get(0).size(); j++)
+				acu += v.get(isla).get(j);
+			return acu;
+		}
+	
+	
+	//******************************************************************************************************
 
 	public int visitantesMesYear(int mes, int[][] v) {
 		int acu = 0;
