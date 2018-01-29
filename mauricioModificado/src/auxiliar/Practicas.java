@@ -559,6 +559,20 @@ public class Practicas {
 			resultado[i] = inferior + rnd.nextInt(superior - inferior + 1);
 		return resultado;
 	}
+	//*******************************************generaFicheroLanzamiento***********************************
+	public void generaFicheroLanzamientoDado(int cuantos) {
+		HashMap<Integer,Integer> resultado = new HashMap<Integer,Integer>();
+		for (int i = 0; i < cuantos; i++) {
+			int aleatorio = 1 + (int) (Math.random() * (6 - 1 + 1));
+			resultado.put(i, aleatorio);
+			System.out.println(i + " " + aleatorio);
+		}
+	}
+		
+	
+	
+	
+	//********************************************frecuenciaAparicion****************************************
 
 	public int[] frecuenciaAparicion(int cuantos, int inferior, int superior) {
 		int[] resultado = new int[superior - inferior + 1];
