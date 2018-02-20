@@ -1,9 +1,16 @@
 package auxiliar;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -19,10 +26,15 @@ import modelo.Estudiante;
 
 public class Practicas {
 
-	//estaesunalineaoriginal
 	
 	
-	// SEGUNDA EVALUACION
+	//************************************************************************************************
+	// ******************************SEGUNDA EVALUACION***********************************************
+	//************************************************************************************************
+	
+	
+	
+	//******************************introLista con ArrayList******************************************
 
 	public ArrayList<Estudiante> introListas() {
 		ArrayList<Estudiante> listaE;
@@ -37,7 +49,7 @@ public class Practicas {
 		Estudiante est2 = new Estudiante(321);
 		listaE.add(0, est2);
 		listaE.remove(listaE.size() - 1);
-		// listaE.set(0, est1);
+			// listaE.set(0, est1);
 		for (Estudiante estudiante : listaE) {
 			// System.out.println(estudiante.getCodGrupo());
 		}
@@ -45,13 +57,13 @@ public class Practicas {
 			// System.out.println(listaE.get(i).getCodGrupo());
 		}
 
-		// System.out.println("fin introListas");
+			// System.out.println("fin introListas");
 		return listaE;
 
 	}
 
-	// 11 enero 2018
-	// Leer una matriz de int y devolverla como ArrayList
+	
+	//****************** Leer una matriz de int y devolverla como ArrayList**************************
 
 	public ArrayList<ArrayList<Integer>> convierteMatrizArrayLista(int[][] matriz) {
 
@@ -65,8 +77,8 @@ public class Practicas {
 		}
 		return resultado;
 	}
-
-	// Mapas, clase HashMap
+	
+	//********************************introMapas Mapas, clase HashMap*******************************
 
 	public HashMap<String, Estudiante> introMapas() {
 		// la clave representa el nif del Estudiante
@@ -86,6 +98,8 @@ public class Practicas {
 		return resultado;
 	}
 
+	//**********************************leerFicheroTexto*********************************************
+	
 	public void leerFicheroTexto() {
 		try {
 			// Abrir el fichero
@@ -99,13 +113,13 @@ public class Practicas {
 			// Leer el fichero linea a linea
 			while ((linea = br.readLine()) != null) {
 
-	//***********************************************************			
+				
 				//String[] campos = linea.split("&&");
 				//String[] campos = linea.split("%");
 					//if (resultado.get)
 				//System.out.println(linea);
 				//System.out.println(calculaEdad(campos[2]));
-//******************************************************
+	
 			}
 			fr.close();
 			br.close();
@@ -115,7 +129,8 @@ public class Practicas {
 			System.out.println(e.getMessage());
 		}
 	}
-	//**********************************************************************************
+	//*************************************resumenVentasPorVendedor*********************************
+	
 	public HashMap<String,Float> resumenVentasPorVendedor( HashMap<String, ArrayList<Float>> ventas){
 		HashMap<String, Float> resultado = new HashMap<String,Float>();
 		//recorrer hm de entrada creando el de salida.
@@ -129,21 +144,14 @@ public class Practicas {
 			for (Float elementoValor : ventas.get(elementoClave)){
 				
 				resultado.put(elementoClave, elementoValor);
-				
-				
 			}
 		}
-		
-		
-		
-		
 		
 		return resultado;
 	}
 		
-	//***********************************************************************************
+	//******************************************calculaEdad String************************************
 	
-
 	public int calculaEdad(String fechaNacimiento) { // ddmmaaaa
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("ddMMyyyy");
 		LocalDate fechaNac = LocalDate.parse(fechaNacimiento, fmt);
@@ -154,7 +162,7 @@ public class Practicas {
 		return periodo.getYears();
 	}
 		
-	//***********************leer fichero con arraylist***********************************************
+	//***********************leer ficheroTexto con ArrayList*****************************************
 	
 	public ArrayList<String> leerFicheroTextoArrayList(String rutaFichero) {
 		ArrayList<String>  resultado = new ArrayList<String>();
@@ -178,7 +186,7 @@ public class Practicas {
 		return resultado;
 	}
 	
-	//******************************leer fichero con hashmap*****************************************************************
+	//******************************leer fichero con HashMap******************************************
 	public HashMap<String, String> leerFicheroTextoHashMap(String rutaFichero) {
 		HashMap<String, String> resultado = new HashMap<String, String>();//la clave es el dni, el valor es la  linea que coincide con el dni.
 		try {
@@ -454,7 +462,47 @@ public class Practicas {
 			
 		return saldoFinal;
 	}
-//*********************************************************************************************************
+//*************************************Calcula Saldo con lectura de fichero 08/02/2018********************************************************************
+	
+	public float calculaSaldo(float saldoInicial, String rutaFicheroMovs) {
+		float saldoFinal = saldoInicial;
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/saldo.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea; 
+			
+			
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+
+				
+				String[] campos = linea.split("#");
+				saldoFinal += Float.parseFloat(campos[1]);
+				
+				System.out.println(campos[0] + " " + campos[1]);
+				//String[] campos = linea.split("%");
+					//if (resultado.get)
+				//System.out.println(linea);
+				//System.out.println(calculaEdad(campos[2]));
+	
+			}
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return saldoFinal;
+	}
+	
+	
+	
+	
+	//*********************************************************************************************************
+	
 	public int[] convierteCadenasANumeros(String[] cadenas) {
 		int[] resultado = new int[cadenas.length];
 		for (int i = 0; i < resultado.length; i++) {
@@ -562,11 +610,25 @@ public class Practicas {
 	//*******************************************generaFicheroLanzamiento***********************************
 	public void generaFicheroLanzamientoDado(int cuantos) {
 		HashMap<Integer,Integer> resultado = new HashMap<Integer,Integer>();
-		for (int i = 0; i < cuantos; i++) {
-			int aleatorio = 1 + (int) (Math.random() * (6 - 1 + 1));
-			resultado.put(i, aleatorio);
-			System.out.println(i + " " + aleatorio);
+		
+		try {
+			FileWriter fr = new FileWriter("ficheros/dado.txt");
+			BufferedWriter br = new BufferedWriter(fr);
+			for (int i = 1; i < cuantos+1; i++) {
+				int aleatorio = 1 + (int) (Math.random() * (6 - 1 + 1));
+				resultado.put(i, aleatorio);
+				br.write(i + " " + aleatorio+ "\n");
+				System.out.println(i + " " + aleatorio);
+			}
+			br.close();
+			fr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
+		
 	}
 		
 	
@@ -729,4 +791,163 @@ public class Practicas {
 			}
 		}
 	}
+	
+	//**************************************grabarArrayListEnFichero**************************
+	
+	public void grabarArrayListEnFichero(String rutaFichero, ArrayList<Object> listaObjetos) {
+		try {
+			FileOutputStream foS = new FileOutputStream(rutaFichero);
+			ObjectOutputStream ooS = new ObjectOutputStream(foS);
+			ooS.writeObject(listaObjetos);
+			ooS.close();
+			foS.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			
+			System.out.println("FileNotFoundException");
+		} catch (IOException e) {
+			System.out.println("IOException");
+		}
+	}
+	
+	//*************************************************************************************
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Object> leerArrayListEnFichero(String rutaFichero){
+		
+		Object test =null;
+		try {
+			FileInputStream fis = new FileInputStream(rutaFichero);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			
+				 test = ois.readObject();
+				
+				System.out.println(test);
+			
+			ois.close();
+			fis.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("FileNotFoundException");
+		} catch (IOException e) {
+			System.out.println("IOException");
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException");
+		}
+		return (ArrayList<Object>)test;
+	}
+	
+	//************************************************************************************************
+	public void leerVehiculoTexto() {
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/vehiculos.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea; 
+			
+			int acumulado = 0;
+			int contador = 0;
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+
+				
+				//String[] campos = linea.split("&&");
+				//String[] campos = linea.split("%");
+					//if (resultado.get)
+				//System.out.println(linea);
+				//System.out.println(calculaEdad(campos[2]));
+	
+			}
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	//*************************************************************************************************
+	//***leer un fichero de txto con datos y pasarlos a un hasmap he imprimirlos en consola************
+	//*************************************************************************************************
+	public void inicializaVisitantesIsla(HashMap<Integer,ArrayList<Float>> resultado) {
+		ArrayList<Float> visitantesMeses = null;
+		
+		for (int isla = 0;  isla < 7; isla++) {
+			 visitantesMeses = new ArrayList<Float>();
+			for (int mes = 0; mes < 12; mes++) {
+				visitantesMeses.add(0f);
+			}
+			
+			resultado.put(isla, visitantesMeses);
+		}
+	}
+	
+		public HashMap<Integer,ArrayList<Float>> LeerVisitantesIslas(String rutaFicheroVisitantes){
+		HashMap<Integer,ArrayList<Float>> resultado = new HashMap<Integer,ArrayList<Float>>();
+	
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader(rutaFicheroVisitantes);
+			BufferedReader br = new BufferedReader(fr);
+			String linea; 
+			inicializaVisitantesIsla(resultado);
+			
+			
+			while ((linea = br.readLine()) != null) {
+
+				
+				String[] campos = linea.split("@");
+				int isla = Integer.parseInt(campos[0]);
+				int mes = Integer.parseInt(campos[1]);
+				float numeroVisitantes = Float.parseFloat(campos[2]);
+				resultado.get(isla -1).set(mes -1,numeroVisitantes);
+								
+			}
+			fr.close();
+			br.close();
+		} catch (FileNotFoundException e) {
+			
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			
+			System.out.println(e.getMessage());
+		}
+		return resultado;
+	}
+		
+		public void listadoIslasMeses(String rutaFicheroVisitantes) {
+			HashMap<Integer, ArrayList<Float>> hm = LeerVisitantesIslas(rutaFicheroVisitantes);
+			// recorrer hm
+			String[] islas = { "GC", "LTE", "FTV", "TFE", "LPA", "GOM", "HIE" };
+			String[] meses = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
+			ArrayList<Float> visitantesIsla = null;
+			Float visitantesMesesPorIsla = 0f;
+			Float subtotal = 0f;
+			Float total = 0f;
+			for (int isla = 0;  isla < 7; isla++) {
+				 System.out.println(islas[isla]);
+				visitantesIsla = hm.get(isla);
+				for (int mes = 0; mes < 12; mes++) {
+					 
+					 visitantesMesesPorIsla = visitantesIsla.get(mes);
+					 System.out.println(meses[mes] +"= " + visitantesMesesPorIsla);
+					 subtotal += visitantesMesesPorIsla;
+				}
+				System.out.println("subTotal de la isla " + islas[isla] +": "+ subtotal   );
+				System.out.println("-----------");
+				total += subtotal;//tengo que poner el acumulador aqui por que aun tiene que recibir valores.
+				subtotal = 0f;
+				
+				
+			}
+			System.out.println("Total: " + total );
+
+		}
+		
+		
+		
 }

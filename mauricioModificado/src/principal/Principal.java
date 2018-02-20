@@ -177,18 +177,37 @@ public class Principal {
 		movimientos.add(70.5f);
 		float resultadoSaldo = practicas.calculaSaldo(1000.0f, movimientos);
 	//******************************************************************************************************
-		
+		float sdFinal = practicas.calculaSaldo(1000.0f, "ficheros/saldo.txt");
+		System.out.println("Su Saldo Actual es:" + sdFinal);
+	//******************************************************************************************************	
 		practicas.generaFicheroLanzamientoDado(6);
 		
+		
 	//*************************************************************************************
+		ArrayList<Object> listaObjetos = new ArrayList<Object>();
+		Estudiante est = new Estudiante(10, "111G", "Paco1", 'M', null, 181, null, null);
+		Estudiante est1 = new Estudiante(20, "222G", "Paco2", 'M', null, 180, null, null);
+		Estudiante est2 = new Estudiante(30, "333G", "Paco3", 'M', null, 180, null, null);
+		listaObjetos.add(est);
+		listaObjetos.add(est1);
+		listaObjetos.add(est2);
+		practicas.grabarArrayListEnFichero("ficheros/arraylist.obj", listaObjetos);
 		
-		System.out.println("fin");
+	//***********************************************************************************
+		ArrayList<Object> listaObjetos2 = practicas.leerArrayListEnFichero("ficheros/arraylist.obj");	
+		System.out.println(listaObjetos2);
 		
-	//********************************************************************************************
 		
+		//*************************************************************************************************
+		//***leer un fichero de txto con datos y pasarlos a un hasmap he imprimirlos en consola************
+		//*************************************************************************************************
 		
+		HashMap<Integer, ArrayList<Float>> resultado1 = practicas.LeerVisitantesIslas("ficheros/DatosIslasMesValor.txt");
+		practicas.listadoIslasMeses("ficheros/DatosIslasMesValor.txt");
 		
-
+		//*************************************************************************************
+		
+		System.out.println("fin");	
 	}
 
 }
