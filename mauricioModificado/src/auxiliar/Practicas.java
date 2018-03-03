@@ -23,6 +23,7 @@ import java.util.Set;
 import modelo.Datos;
 import modelo.Equipo;
 import modelo.Estudiante;
+import modelo.Vehiculo;
 
 public class Practicas {
 
@@ -57,7 +58,7 @@ public class Practicas {
 			// System.out.println(listaE.get(i).getCodGrupo());
 		}
 
-			// System.out.println("fin introListas");
+			 System.out.println("fin introListas");
 		return listaE;
 
 	}
@@ -922,23 +923,23 @@ public class Practicas {
 		public void listadoIslasMeses(String rutaFicheroVisitantes) {
 			HashMap<Integer, ArrayList<Float>> hm = LeerVisitantesIslas(rutaFicheroVisitantes);
 			// recorrer hm
-			String[] islas = { "GC", "LTE", "FTV", "TFE", "LPA", "GOM", "HIE" };
-			String[] meses = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
+			String[] islas = {"GRAN CANARIA", "LANZAROTE", "FUERTEVENTURA", "TENERIFE", "LA PALMA", "LA GOMERA", "EL HIERRO"};
+			String[] meses = {"ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
 			ArrayList<Float> visitantesIsla = null;
 			Float visitantesMesesPorIsla = 0f;
 			Float subtotal = 0f;
 			Float total = 0f;
 			for (int isla = 0;  isla < 7; isla++) {
-				 System.out.println(islas[isla]);
+				 System.out.print(islas[isla]+"\n");
 				visitantesIsla = hm.get(isla);
 				for (int mes = 0; mes < 12; mes++) {
 					 
 					 visitantesMesesPorIsla = visitantesIsla.get(mes);
-					 System.out.println(meses[mes] +"= " + visitantesMesesPorIsla);
+					 System.out.print("\t"+meses[mes] +"= " + visitantesMesesPorIsla);
 					 subtotal += visitantesMesesPorIsla;
 				}
 				System.out.println("subTotal de la isla " + islas[isla] +": "+ subtotal   );
-				System.out.println("-----------");
+				
 				total += subtotal;//tengo que poner el acumulador aqui por que aun tiene que recibir valores.
 				subtotal = 0f;
 				
@@ -946,8 +947,364 @@ public class Practicas {
 			}
 			System.out.println("Total: " + total );
 
+	}
+//************************************************************************************
+//************************************************************************************
+		public void listadoMesesIslas(String rutaFicheroVisitantes) {
+			HashMap<Integer, ArrayList<Float>> hm = LeerVisitantesIslas(rutaFicheroVisitantes);
+			// recorrer hm
+			String[] islas = {"GRAN CANARIA", "LANZAROTE", "FUERTEVENTURA", "TENERIFE", "LA PALMA", "LA GOMERA", "EL HIERRO"};
+			String[] meses = {"ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
+			
+			Float subtotal = 0f;
+			Float total = 0f;
+			for (int mes = 0; mes < 12; mes++) {
+				
+				
+				System.out.print("\t"+ meses[mes]);
+				
+				
+				for (int isla = 0;  isla < 7; isla++) {
+					
+				Float valorIsla = hm.get(isla).get(mes);
+				subtotal += valorIsla;
+				
+					System.out.print("\t"+ islas[isla] +": "+ valorIsla); 
+					 
+				}
+				
+				System.out.println("Total de visitantes de " + meses[mes]+ ": " + subtotal);
+				total += subtotal;
+				subtotal = 0f; 
+				
+				
+				
+			}
+			System.out.println("Total: " + total );
+
+	}
+
+
+
+//************************************************************************************
+//************************************************************************************
+
+public String operacionMatematica(String num1, int num2){
+	String suma = num1 +num2;
+	return suma;
+	
+}
+//************************************************************************************
+//************************************************************************************
+
+public float probar(Vehiculo coche, float comision) {//----todas las clases son tipos tambien en este 
+													//caso Vehiculo o cualquier clase que yo cree
+	
+	float suma = coche.getPrecio() + comision;
+	
+	
+	return suma;
+}
+
+//************************************************************************************
+//************************************************************************************
+public void leerFicheroTextoOrdenadoClave(String rutaFichero) {
+	try {
+		// Abrir el fichero
+		FileReader fr = new FileReader(rutaFichero);
+		BufferedReader br = new BufferedReader(fr);
+		String codigo_leido, codigo_anterior = null;
+		int contador_grupo = 0;
+		int contador_total = 0;
+		String linea;
+		// Leer el fichero linea a linea
+		while ((linea = br.readLine()) != null) {
+			String[] campos = linea.split("&&");
+			codigo_leido = campos[0];
+			if (codigo_anterior == null) // primer registro
+				codigo_anterior = codigo_leido;
+			if (!codigo_leido.equals(codigo_anterior)) {
+				System.out.println("Hay " + contador_grupo + " alumnos en el grupo " + codigo_anterior);
+				contador_total += contador_grupo;
+				
+				contador_grupo = 0;
+				codigo_anterior = codigo_leido;
+			}
+           contador_grupo ++;
+		}
+		System.out.println("Hay " + contador_grupo + " alumnos en el grupo " + codigo_anterior);
+		contador_total += contador_grupo;
+		System.out.println("Hay " + contador_total + " alumnos en total ");
+		contador_total += contador_grupo;
+		fr.close();
+		br.close();
+	} catch (FileNotFoundException e) {
+		System.out.println(e.getMessage());
+	} catch (IOException e) {
+		System.out.println(e.getMessage());
+	}
+}
+
+//********************************************************************************************
+//********************************************************************************************
+public static void grabarObjetosEnFichero(String fichero) {
+	Estudiante est = new Estudiante(10, "111G", "Paco1", 'M', null, 181, null, null);
+	Estudiante est1 = new Estudiante(20, "222G", "Paco2", 'M', null, 180, null, null);
+	
+	ArrayList<Estudiante> lista = new ArrayList<Estudiante>();
+
+	// añadimos los 3 estudiantes a la lista
+
+	lista.add(est);
+	lista.add(est1);
+	//lista.add(est2);
+
+	// abrir el fichero de objetos...
+	try {
+		FileOutputStream fIs = new FileOutputStream(fichero);
+		ObjectOutputStream fObj = new ObjectOutputStream(fIs);
+
+		// guardar los objetos estudiantes en el fichero...
+		fObj.writeObject(lista);
+		// fObj.writeObject(est);
+		// fObj.writeObject(est1);
+		// fObj.writeObject(est2);
+		fObj.close();
+		fIs.close();
+	} catch (FileNotFoundException e) {
+		System.out.println("Fichero no encontrado");
+	} catch (IOException e) {
+		System.out.println("Error IO");
+
+	}
+	System.out.println("Fichero creado");
+}
+
+//********************************************************************************************
+//********************************************************************************************
+
+public Estudiante crearEstudianteLeido(String[] datos) {
+		int grupo = Integer.parseInt(datos[0]);
+		Estudiante estudiante = new Estudiante(grupo);
+		estudiante.setNif(datos[1]);
+		estudiante.setNombre(datos[2]);
+		estudiante.setSexo(datos[3].charAt(0));
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate fechaNac = LocalDate.parse(datos[4], fmt);
+	estudiante.setFecha(fechaNac);
+		estudiante.setAltura(Integer.parseInt(datos[5]));
+		estudiante.setMadre(null);
+		estudiante.setPadre(null);
+		return estudiante;
+
+	}
+
+	public void copiaEstudiantesTxtAObjetos(String rutaTxt, String rutaObj) {
+		try {
+			// Abrir el fichero entrada
+			FileReader fr = new FileReader(rutaTxt);
+			BufferedReader br = new BufferedReader(fr);
+			// Abrir el fichero salida
+			FileOutputStream fIs = new FileOutputStream(rutaObj);
+			ObjectOutputStream fObj = new ObjectOutputStream(fIs);
+
+			String linea;
+			// System.out.println(LocalDate.now());
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+				String[] campos = linea.split("#");
+				// crear estudiante a partir del registro leido
+				Estudiante estudiante = crearEstudianteLeido(campos);
+				// grabar objeto estudiante en fichero ..
+				fObj.writeObject(estudiante);
+
+			}
+			fr.close();
+			br.close();
+			fIs.close();
+			fObj.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+	
+	//********************************************************************************************
+	
+	public String[] leerComunidadesAutonomasTxt() {
+		String[] comunidades = new String[19];
+		int index = 0;
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/comunidades.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+				comunidades[index] = linea.split("%")[1];
+				index++;
+			}
+			fr.close();//cierra el fichero
+			br.close();//cierra el buffer
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}return comunidades;
+	}
+	public String[] leerComunidadesAutonomasTxt2() {
+		String[] comunidades = new String[19];
+		int index = 0;
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/comunidades.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			// Leer el fichero linea a linea
+			linea = br.readLine();
+			//Este while sería con la condición tradicional sin usar una vaiarable dentro
+			//a la que asignamos el valor de la linea.
+			while (linea != null) {
+				comunidades[index] = linea.split("%")[1];
+				index++;
+				linea = br.readLine();
+			}
+			fr.close();//cierra el fichero
+			br.close();//cierra el buffer
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}return comunidades;
+	}
+	
+	public String[] leerProvinciasTxt() {
+		String[] provincias = new String[52];
+		int index = 0;
+		try {
+			// Abrir el fichero
+			FileReader fr = new FileReader("ficheros/provincias.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String linea;
+			
+			// Leer el fichero linea a linea
+			while ((linea = br.readLine()) != null) {
+				/*String provincia = strLine.split("%")[0];
+				String comunidadAutonomaDeLaProvincia = strLine.split("%")[1];
+				String habitantesDeLaProvincia = strLine.split("%")[2];
+				resultado[index] = provincia + "%" + comunidadAutonomaDeLaProvincia + "%" + habitantesDeLaProvincia;*/
+				provincias[index] = linea;
+				index++;
+			}
+			fr.close();//cierra el fichero
+			br.close();//cierra el buffer
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		return provincias;
+	}
+	
+	public void mostrarDatosComAutonomasProvinciasHabitantes(HashMap<Integer,ArrayList<Integer>> habitantes, HashMap<Integer,ArrayList<String>> nombresProvincias, String[] nombreComunidadesAutonomas ) {
+		int subTotal = 0;
+		int total = 0;
+		System.out.println("***************************************************");
+		System.out.println("******Comunidades Autónomas y sus Provincias*******");
+		System.out.println("***************************************************");
+		for (int indexComunidad = 0; indexComunidad < habitantes.size(); indexComunidad++) {
+			System.out.println("----  " + nombreComunidadesAutonomas[indexComunidad] + "  ----");
+			for (int indexProvincia = 0; indexProvincia < habitantes.get(indexComunidad).size(); indexProvincia++) {			
+				System.out.print(nombresProvincias.get(indexComunidad).get(indexProvincia) + ":   \t");
+				int numHabitantes = habitantes.get(indexComunidad).get(indexProvincia);
+				subTotal += numHabitantes;
+				System.out.println(numHabitantes);
+					
+			}
+			System.out.println("TOTAL de habitantes de " + nombreComunidadesAutonomas[indexComunidad] + " = " + subTotal);
+			total += subTotal;
+			subTotal = 0;
+			System.out.println();
+		}
+		System.out.println("TOTAL de habitantes de España = " + total);
+	}
+	
+	public void mostrarDatosComAutonomasProvinciasHabitantes2(HashMap<Integer,ArrayList<Integer>> habitantes, HashMap<Integer,ArrayList<String>> nombresProvincias, String[] nombreComunidadesAutonomas ) {
+		int subTotal = 0;
+		int total = 0;
+		
+		System.out.println("***************************************************");
+		System.out.println("******Comunidades Autónomas y sus Provincias*******");
+		System.out.println("***************************************************");
+		
+		for ( Integer indexComunidad : habitantes.keySet()) {
+			int indexProvincia =0;
+			System.out.println("----  " + nombreComunidadesAutonomas[indexComunidad] + "  ----");
+			ArrayList<Integer> provincias = habitantes.get(indexComunidad);
+			for (Integer cantidadHabitantes : provincias) {				
+				System.out.print(nombresProvincias.get(indexComunidad).get(indexProvincia) + ":   \t");
+				subTotal += cantidadHabitantes;
+				System.out.println(cantidadHabitantes);
+				indexProvincia++;
+			}
+			System.out.println("TOTAL de habitantes de " + nombreComunidadesAutonomas[indexComunidad] + " = " + subTotal);
+			total += subTotal;
+			subTotal = 0;
+			System.out.println();
 		}
 		
+		System.out.println("TOTAL de habitantes de España = " + total);
+	}
+	
+	
+	
+	//Leemos dos ficheros de textos llamados provincias.txt y comunidades.txt
+	//debemos sacar los datos de los habitantes empadronados de cada provincia pero
+	//agrupadas cada una por su comunidad autonoma, con el total de habitantes por
+	//Comunidad autonoma
+	public void leerFicheroTextoProvinciasComAutoYListarDatos() {
+		String[] comunidadesAutonomas = leerComunidadesAutonomasTxt();
+		String[] datosTodasLasProvincias = leerProvinciasTxt();
+		HashMap<Integer,ArrayList<Integer>> comunidadesProvinciasHabitantes = new HashMap<Integer,ArrayList<Integer>>();
+		for (int i = 0; i < comunidadesAutonomas.length; i++) {
+				ArrayList<Integer> listadoProvincias = new ArrayList<Integer>();
+				comunidadesProvinciasHabitantes.put(i, listadoProvincias);
+			
+		}
+
+		//El siguiente HashMap llamado nombresProvincias almacena en su clave el indice de la comunidad
+		//y en el valor un ArrayList de String donde cada String es el nombre de a provincia
+		HashMap<Integer,ArrayList<String>> nombresProvincias = new HashMap<Integer,ArrayList<String>>();
 		
+			//Recorremos el Array de String que nos devolvió el método leerProvinciasTxt()
+			//
+			for (String datosUnaProvincia : datosTodasLasProvincias) {
+				String[] datosUnaProvinciaSeparados = datosUnaProvincia.split("%");				
+				int indiceComunidadAutonoma = Integer.parseInt(datosUnaProvinciaSeparados[2])-1;			
+				int habitantesUnaProvincia = Integer.parseInt(datosUnaProvinciaSeparados[3]);				
+				//añadimos un condicional que solo cree un ArrayList la primera vez
+				//cuando estamos en una comunidad autonoma y no nos cree ninguno mas
+				//cuando volvamos a tener que añadir datos a la misma comunidad autonoma.
+				if (nombresProvincias.get(indiceComunidadAutonoma) == null) {
+					ArrayList<String> provincias = new ArrayList<String>();
+					nombresProvincias.put(indiceComunidadAutonoma,provincias);
+				}
+				//añadimos al HashMap de provincias, el nombre que le corresponde en la comunidad atonoma
+				//a la que pertence.
+				nombresProvincias.get(indiceComunidadAutonoma).add(datosUnaProvinciaSeparados[1]);				
+				//añadimos el número de habitantes a la provincia en la comunidad autonoma que corresponde
+				comunidadesProvinciasHabitantes.get(indiceComunidadAutonoma).add(habitantesUnaProvincia);
+			}
+		//mostrarDatosComAutonomasProvinciasHabitantes(comunidadesProvinciasHabitantes,nombresProvincias, comunidadesAutonomas);	
+		mostrarDatosComAutonomasProvinciasHabitantes2(comunidadesProvinciasHabitantes,nombresProvincias, comunidadesAutonomas);
+		System.out.println("BreakPoint");
 		
+	}
+	
+
+	
 }
+

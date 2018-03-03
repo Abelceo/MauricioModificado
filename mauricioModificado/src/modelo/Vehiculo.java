@@ -2,14 +2,33 @@ package modelo;
 
 import java.time.LocalDate;
 
-public class vehiculo {
+public class Vehiculo {
 	private int id;
-	
 	private String matricula;
 	private int marcaModelo;
 	private LocalDate fechaMatricula;
 	private float precio;
 	
+	
+	
+	
+	public Vehiculo(int id, String matricula, int marcaModelo, LocalDate fechaMatricula, float precio) {
+		super();
+		this.id = id;
+		this.matricula = matricula;
+		this.marcaModelo = marcaModelo;
+		this.fechaMatricula = fechaMatricula;
+		this.precio = precio;
+	}
+	
+	
+	
+	public Vehiculo() {
+		super();
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

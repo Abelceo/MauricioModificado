@@ -13,6 +13,7 @@ import modelo.Equipo;
 import modelo.Estudiante;
 import modelo.Persona;
 import modelo.Profesor;
+import modelo.Vehiculo;
 
 public class Principal {
 	// metodo por el que debe empezar la ejecución ..
@@ -36,8 +37,9 @@ public class Principal {
 		 * 9, 21), 170, padre, madre); System.out.println("persona2 creada");
 		 * System.out.println("Nombre madre : " + persona2.getMadre().getNombre());
 		 */
+		
+		
 		// crear un Estudiante
-
 		Estudiante estAnonimo = new Estudiante(123);
 
 		Estudiante estudiante = new Estudiante(111, "44556677G", "Rafael", 'M', LocalDate.now(), 187, estAnonimo, null);
@@ -61,6 +63,7 @@ public class Principal {
 		// practicas.listaDiasSemana();
 		// Estudiante[] lista = new Datos().getEstudiantes();
 		// practicas.listaEstudiantes(new Datos().getEstudiantes());
+		
 		int[][] visitantesYear = { { 2, 4, 5, 1, 3, 2, 1, 1, 1, 3, 5, 1 },
 				{ 23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 13 }, { 23, 3, 56, 12, 32, 23, 17, 12, 11, 34, 45, 12 },
 				{ 23, 1, 56, 12, 32, 23, 17, 12, 11, 34, 45, 13 }, { 23, 4, 56, 12, 32, 23, 17, 12, 11, 34, 45, 10 },
@@ -73,6 +76,8 @@ public class Principal {
 		String[] meses = { "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC" };
 		int isla=2; int mes =7; System.out.println("Visitantes en "+ islas[isla]
 				 +" : " + practicas.visitantesIslaYear(isla, visitantesYear));
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
 		
 		ArrayList<ArrayList<Integer>> listaMatriz = practicas.convierteMatrizArrayLista(visitantesYear);
 	//************************************************************************************************************	
@@ -90,7 +95,8 @@ public class Principal {
 		
 		
 		
-	//*************************************************************************************************************	
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
 		
 		ArrayList<ArrayList<Integer>> datos2 = practicas.convierteMatrizArrayEnMatrizArrayList(visitantesYear);
 		System.out.println("Arraylist: " + practicas.visitantesIslaYear2(isla, datos2));
@@ -149,7 +155,7 @@ public class Principal {
 		//int[] primos = practicas.numerosPrimos(100);
 		//int [] fibonacci = practicas.numerosFibonacci(20);
 		//ArrayList<Estudiante> lista = practicas.introListas();
-	//	practicas.listaEstudiantes(practicas.introListas());
+		practicas.listaEstudiantes(practicas.introListas());
 		ArrayList<String> lista = new ArrayList<String>();
 		lista.add("12");
 		lista.add("19");
@@ -170,20 +176,21 @@ public class Principal {
 		
 		practicas.resumenVentasPorVendedor(resultado);
 		
-	//*****************************************valores *****************************************************	
+		System.out.println("----------------------------------------------------------------------------");	
+		//**********************************************************************	
 		ArrayList<Float> movimientos = new ArrayList<Float>();
 		movimientos.add(50.5f);
 		movimientos.add(60.5f);
 		movimientos.add(70.5f);
 		float resultadoSaldo = practicas.calculaSaldo(1000.0f, movimientos);
-	//******************************************************************************************************
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
 		float sdFinal = practicas.calculaSaldo(1000.0f, "ficheros/saldo.txt");
 		System.out.println("Su Saldo Actual es:" + sdFinal);
-	//******************************************************************************************************	
+		System.out.println("----------------------------------------------------------------------------");	
 		practicas.generaFicheroLanzamientoDado(6);
 		
-		
-	//*************************************************************************************
+		//**********************************************************************
 		ArrayList<Object> listaObjetos = new ArrayList<Object>();
 		Estudiante est = new Estudiante(10, "111G", "Paco1", 'M', null, 181, null, null);
 		Estudiante est1 = new Estudiante(20, "222G", "Paco2", 'M', null, 180, null, null);
@@ -193,21 +200,46 @@ public class Principal {
 		listaObjetos.add(est2);
 		practicas.grabarArrayListEnFichero("ficheros/arraylist.obj", listaObjetos);
 		
-	//***********************************************************************************
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
 		ArrayList<Object> listaObjetos2 = practicas.leerArrayListEnFichero("ficheros/arraylist.obj");	
 		System.out.println(listaObjetos2);
 		
 		
-		//*************************************************************************************************
-		//***leer un fichero de txto con datos y pasarlos a un hasmap he imprimirlos en consola************
-		//*************************************************************************************************
 		
+		//***leer un fichero de txto con datos y pasarlos a un hasmap he imprimirlos en consola************
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
 		HashMap<Integer, ArrayList<Float>> resultado1 = practicas.LeerVisitantesIslas("ficheros/DatosIslasMesValor.txt");
 		practicas.listadoIslasMeses("ficheros/DatosIslasMesValor.txt");
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
+		practicas.listadoMesesIslas("ficheros/DatosIslasMesValor.txt");
 		
-		//*************************************************************************************
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
+		Vehiculo coche = new Vehiculo(1, "2332", 125, LocalDate.of(2018, 12, 12), 9800f);
+		System.out.println(practicas.probar(coche, 1.5f));
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
+		System.out.println(practicas.operacionMatematica("3", 6));	
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
+		practicas.leerFicheroTextoOrdenadoClave("ficheros/grupo_estudiantes.txt");
+		//**********************************************************************
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
+		practicas.copiaEstudiantesTxtAObjetos("ficheros/estudiantes.txt", "ficheros/estudiantes.obj");
+		System.out.println("----------------------------------------------------------------------------");
+		//**********************************************************************
+		practicas.leerFicheroTextoProvinciasComAutoYListarDatos();
 		
-		System.out.println("fin");	
+		
+		
+		
+		System.out.println("fin");
+		
+		
 	}
 
 }
